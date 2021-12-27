@@ -68,7 +68,9 @@
 }
 
 .forecast-box {
-    background-color: brown;
+    background-color: rgb(54, 54, 75);
+    color: white;
+    border-radius: 1em;
     padding-left: 1rem;
     margin-right: 1rem;
     flex: 1;
