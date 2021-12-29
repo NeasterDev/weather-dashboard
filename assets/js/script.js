@@ -10,6 +10,7 @@ var weatherTempEl = document.querySelector("#weather-temp");
 var weatherWindEl = document.querySelector("#weather-wind");
 var weatherHumidityEl = document.querySelector("#weather-humidity");
 var weatherUvEl = document.querySelector("#weather-uv");
+var uvValEl = document.querySelector("#uv");
 
 var appId = "ef8fa03f5832204a6c4c00587e87395b";
 var storageCounter = 0;
@@ -31,7 +32,7 @@ var newResult = function(cityName,num) {
 citySearchFormEl.addEventListener("submit", function(event){
     event.preventDefault();
     cityName = citySearchEl.value.split(" ");
-    
+
     while(forecastInfoEl.firstChild) {
         forecastInfoEl.removeChild(forecastInfoEl.firstChild);
     }
@@ -65,7 +66,14 @@ citySearchFormEl.addEventListener("submit", function(event){
                 weatherTempEl.textContent = "Temp: " + JSON.stringify(datas.current.temp) + " \xB0" + "F";
                 weatherWindEl.textContent = "Wind: " + JSON.stringify(datas.current.wind_speed) + " mph";
                 weatherHumidityEl.textContent = "Humidity: " + JSON.stringify(datas.current.humidity) + "%";
-                weatherUvEl.textContent = "UV Index: " + JSON.stringify(datas.current.uvi);
+                uvValEl.textContent = JSON.stringify(datas.current.uvi);
+                if(datas.current.uvi <= 2) {
+                    uvValEl.style.backgroundColor = "green";
+                } else if (datas.current.uvi <= 7) {
+                    uvValEl.style.backgroundColor = "yellow";
+                } else {
+                    uvValEl.style.backgroundColor = "red";
+                }
 
                 for (var i = 0; i < searchResultFormEl.children.length; i++) {
                     // check if the city has already been searched
@@ -176,7 +184,14 @@ searchResultFormEl.addEventListener("click", function(event) {
                 weatherTempEl.textContent = "Temp: " + JSON.stringify(datas.current.temp) + " \xB0" + "F";
                 weatherWindEl.textContent = "Wind: " + JSON.stringify(datas.current.wind_speed) + " mph";
                 weatherHumidityEl.textContent = "Humidity: " + JSON.stringify(datas.current.humidity) + "%";
-                weatherUvEl.textContent = "UV Index: " + JSON.stringify(datas.current.uvi);
+                uvValEl.textContent = JSON.stringify(datas.current.uvi);
+                if(datas.current.uvi <= 2) {
+                    uvValEl.style.backgroundColor = "green";
+                } else if (datas.current.uvi <= 7) {
+                    uvValEl.style.backgroundColor = "yellow";
+                } else {
+                    uvValEl.style.backgroundColor = "red";
+                }
             
                 var currentDate = new Date();
                 var currentMonth = new Date();

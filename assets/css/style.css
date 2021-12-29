@@ -111,3 +111,8 @@
     background-color: rgb(182, 182, 182);
     border: none;
 }
+
+#uv {
+    padding: 0 10px;
+    border-radius: 5px;
+}
