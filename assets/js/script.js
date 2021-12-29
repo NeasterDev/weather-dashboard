@@ -25,13 +25,29 @@ var newResult = function(cityName,num) {
         // append result element
         searchResultFormEl.append(newResult);
     
+        while(num <= localStorage.length){
+            num++;
+        }
         localStorage.setItem("city" + num, cityName);
+    }
+}
+
+var getResults = function(cityName) {
+    if(cityName) {
+        var newResult = document.createElement('input');
+        newResult.setAttribute('type', 'submit');
+        newResult.setAttribute('id', 'result');
+        newResult.setAttribute('name', 'result');
+        newResult.setAttribute('value', cityName);
+        // append result element
+        searchResultFormEl.append(newResult);
+    
     }
 }
 
 citySearchFormEl.addEventListener("submit", function(event){
     event.preventDefault();
-    cityName = citySearchEl.value.split(" ");
+    cityName = citySearchEl.value;
 
     while(forecastInfoEl.firstChild) {
         forecastInfoEl.removeChild(forecastInfoEl.firstChild);
@@ -156,10 +172,10 @@ searchResultFormEl.addEventListener("click", function(event) {
         forecastInfoEl.removeChild(forecastInfoEl.firstChild);
     }
     if(event.target.value) {
-        var input = event.target.value.split(" ");
+        var input = event.target.value;
         console.log("0" + input[0]);
         console.log("1" + input[1]);
-        var url = "https://api.openweathermap.org/data/2.5/weather?q=" + input[0] + "&units=imperial&appid=" + appId;
+        var url = "https://api.openweathermap.org/data/2.5/weather?q=" + input + "&units=imperial&appid=" + appId;
         var newUrl = "";
         var datas = {};
         var lat, lon = "";
@@ -255,3 +271,8 @@ searchResultFormEl.addEventListener("click", function(event) {
         });
     }
 });
+
+for (let i = 1; i <= localStorage.length; i++) {
+    console.log(localStorage.getItem("city" + i));
+    getResults(localStorage.getItem("city" + i));
+}
